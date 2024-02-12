@@ -1,5 +1,5 @@
 const $ = selector => document.querySelector(selector);
-
+document.addEventListener("DOMContentLoaded");
 const joinList = evt => {
     // get user entries from text boxes
     const email1 = $("#email_1").value;
