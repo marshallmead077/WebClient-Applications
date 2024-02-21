@@ -1,23 +1,38 @@
 "use strict";
 
-// initialize total variable
-let total = 0;
-//get 3 scores from user and add them together
-const score1 = parseInt(prompt("Enter test score"));
-total += score1;
+const scores = [];
+let highestScore = 0; // highestScore variable with initial value
 
-const score2 = parseInt(prompt("Enter test score"));
-total += score2;
+// use do-while loop to get the scores from the user
+let score = 0;
+do {
+    score = parseInt(prompt("Enter a test score, or enter -1 to end scores", -1));
 
-const score3 = parseInt(prompt("Enter test score"));
-total += score3;
+    if (score >= 0 && score <= 100) {
+        scores.push(score); // add score to scores array
+        // Update highestScore if current score is greater
+        if (score > highestScore) {
+            highestScore = score;
+        }
+    } else if (score != -1) {
+        alert("Score must be a valid number from 0 through 100");
+    }
+} while (score != -1);
 
-//calculate the average
-const average = parseInt(total/3);
+if (scores.length > 0) {
+    // use a for-in loop to add each score to total, and display score
+    let total = 0;
+    /* Commenting out the for-of loop
+    for (let score of scores) {
+        total += score;
+        document.write(`<p>Score ${scores.indexOf(score) + 1}: ${score}</p>`);
+    }
+    */
 
-// display the scores
-const html = '<p>Score 1 = ' + score1 + '</p>' +
-    '<p>Score 2 = ' + score2 + '</p>' +
-    '<p>Score 3 = ' + score3 + '</p>' +
-    '<p>Average score = ' + average + '</p>';
-document.write(html);
+    //  method to display highest score
+    document.write(`<p>Highest score is ${highestScore}</p>`);
+
+    //calculate and display the average
+    const average = parseInt(total / scores.length);
+    document.write(`<p>Average score is ${average}</p>`);
+}
